@@ -1,0 +1,12 @@
+(source "gnu" "http://elpa.gnu.org/packages/")
+(source "marmalade" "http://marmalade-repo.org/packages/")
+(source "melpa" "http://melpa.milkbox.net/packages/")
+
+(depends-on "cask")
+(depends-on "cl-lib")
+(depends-on "dash")
+(depends-on "enh-ruby-mode")
+(depends-on "epl")
+(depends-on "f")
+(depends-on "pallet")
+(depends-on "s")
