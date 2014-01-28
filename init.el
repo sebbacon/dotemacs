@@ -1,5 +1,26 @@
 (setq inhibit-splash-screen t)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+;; (when
+;;     (load
+;;      (expand-file-name "~/.emacs.d/elpa/package.el")
+;;      (require 'package)
+;;      (add-to-list 'package-archives
+;;                   '("marmalade" .
+;;                     "http://marmalade-repo.org/packages/"))
+;;      (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/"))
+;;      (when (< emacs-major-version 24)
+;;        (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))))
+;;   (package-initialize))
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/mode-compile"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/coffee-mode"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/mo-git-blame"))
@@ -8,9 +29,9 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/flymake-haml"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/rspec-mode"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/rdebug"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/smartparens"))
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/smartparens"))
 ;;(add-to-list 'load-path (expand-file-name "~/.emacs.d/emacs-pry"))
-
+(require 'rdebug)
 ;;(setenv "PATH" (concat (getenv "PATH") "/home/seb/.rvm/gems/ruby-1.9.3-p385/bin/"))
 ;;(setq exec-path (append exec-path '("/home/seb/.rvm/gems/ruby-1.9.3-p385/bin/")))
 
@@ -21,7 +42,6 @@
 (autoload 'grep-buffers "grep-buffers" "Grep in open buffers." t)
 (autoload 'markdown-mode "markdown-mode.el"
    "Major mode for editing Markdown files" t)
-(load-library "rdebug")
 (autoload 'kill-ring-search "kill-ring-search"
   "Search the kill ring in the minibuffer."
   (interactive))
@@ -72,9 +92,9 @@
                '("\\.rhtml$" . html-mode)
                '("\\.php$" . php-mode)
                '("\\.text" . markdown-mode)
-               '("\\.rake" . enh-ruby-mode)
-               '("Rakefile" . enh-ruby-mode)
-               '("Gemfile" . enh-ruby-mode)
+               '("\\.rake" . ruby-mode)
+               '("Rakefile" . ruby-mode)
+               '("Gemfile" . ruby-mode)
                '("\\.md" . markdown-mode))
             auto-mode-alist))
 
@@ -121,13 +141,13 @@
 (setq scss-compile-at-save nil)
 (setq css-indent-offset 2)
 
-(require 'smartparens-config)
-(require 'smartparens-ruby)
-(smartparens-global-mode)
-(show-smartparens-global-mode t)
-(sp-with-modes '(rhtml-mode)
-               (sp-local-pair "<" ">")
-               (sp-local-pair "<%" "%>"))
+;; (require 'smartparens-config)
+;; (require 'smartparens-ruby)
+;; (smartparens-global-mode)
+;; (show-smartparens-global-mode t)
+;; (sp-with-modes '(rhtml-mode)
+;;                (sp-local-pair "<" ">")
+;;                (sp-local-pair "<%" "%>"))
 
 (add-hook 'php-mode-user-hook 'flymake-php-load)
 (add-hook 'python-mode-hook
@@ -324,21 +344,3 @@ debugger"))
 
 ; start an emacs server by default
 (server-start)
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el")
-     (require 'package)
-     (add-to-list 'package-archives
-                  '("marmalade" .
-                    "http://marmalade-repo.org/packages/"))
-     (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
-     (when (< emacs-major-version 24)
-       (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))))
-  (package-initialize))
-(require 'pallet)

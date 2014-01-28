@@ -3,10 +3,11 @@
 (source "melpa" "http://melpa.milkbox.net/packages/")
 
 (depends-on "cask")
-(depends-on "cl-lib")
-(depends-on "dash")
 (depends-on "enh-ruby-mode")
 (depends-on "epl")
+(depends-on "eproject")
 (depends-on "f")
+(depends-on "floobits")
+(depends-on "gist")
 (depends-on "pallet")
 (depends-on "s")
